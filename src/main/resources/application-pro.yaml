@@ -1,0 +1,14 @@
+#用户名 密码配置
+security:
+  user:
+    name: admin
+    password: test
+##端口号
+#配置访问路径，比如访问时为http://localhost:8081/demo/..
+server:
+   context-path: /demo
+   port: 8082
+spring:
+   jackson:
+      serialization:
+          write-dates-as-timestamps: false
