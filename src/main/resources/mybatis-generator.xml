@@ -10,9 +10,15 @@
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
-        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+        <plugin type="${mapper.plugin}">
             <property name="mappers" value="${mapper.Mapper}"/>
         </plugin>
+
+        <commentGenerator>
+            <!-- 忽略注释 -->
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
 
         <jdbcConnection driverClass="${jdbc.driverClass}"
                         connectionURL="${jdbc.url}"
@@ -20,14 +26,25 @@
                         password="${jdbc.password}">
         </jdbcConnection>
 
-        <javaModelGenerator targetPackage="com.example.user.model" targetProject="${entity.target.dir}"/>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
 
-        <sqlMapGenerator targetPackage="com.example.user.model.xml"
-                         targetProject="${entity.target.dir}"/>
+        <javaModelGenerator targetPackage="com.example.user.model" targetProject="${entity.target.dir}">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="xml"
+                         targetProject="${targetResourcesProject}">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
 
         <javaClientGenerator targetPackage="com.example.user.model.mapper"
                              targetProject="${entity.target.dir}"
-                             type="XMLMAPPER"/>
+                             type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
 
         <table tableName="user_info">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>

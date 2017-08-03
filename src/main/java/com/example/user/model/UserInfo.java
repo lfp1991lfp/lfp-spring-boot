@@ -88,7 +88,7 @@ public class UserInfo {
 	 * @param loginName
 	 */
 	public void setLoginName(String loginName) {
-		this.loginName = loginName;
+		this.loginName = loginName == null ? null : loginName.trim();
 	}
 	
 	/**
@@ -102,7 +102,7 @@ public class UserInfo {
 	 * @param name
 	 */
 	public void setName(String name) {
-		this.name = name;
+		this.name = name == null ? null : name.trim();
 	}
 	
 	/**
@@ -116,7 +116,7 @@ public class UserInfo {
 	 * @param password
 	 */
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = password == null ? null : password.trim();
 	}
 	
 	/**
@@ -130,7 +130,7 @@ public class UserInfo {
 	 * @param salt
 	 */
 	public void setSalt(String salt) {
-		this.salt = salt;
+		this.salt = salt == null ? null : salt.trim();
 	}
 	
 	/**
@@ -172,7 +172,7 @@ public class UserInfo {
 	 * @param email
 	 */
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = email == null ? null : email.trim();
 	}
 	
 	/**
@@ -186,7 +186,7 @@ public class UserInfo {
 	 * @param phone
 	 */
 	public void setPhone(String phone) {
-		this.phone = phone;
+		this.phone = phone == null ? null : phone.trim();
 	}
 	
 	/**
@@ -200,7 +200,7 @@ public class UserInfo {
 	 * @param icon
 	 */
 	public void setIcon(String icon) {
-		this.icon = icon;
+		this.icon = icon == null ? null : icon.trim();
 	}
 	
 	/**
@@ -228,7 +228,7 @@ public class UserInfo {
 	 * @param state
 	 */
 	public void setState(String state) {
-		this.state = state;
+		this.state = state == null ? null : state.trim();
 	}
 	
 	/**
@@ -284,7 +284,7 @@ public class UserInfo {
 	 * @param delFlag
 	 */
 	public void setDelFlag(String delFlag) {
-		this.delFlag = delFlag;
+		this.delFlag = delFlag == null ? null : delFlag.trim();
 	}
 	
 	/**
@@ -312,6 +312,6 @@ public class UserInfo {
 	 * @param description
 	 */
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = description == null ? null : description.trim();
 	}
 }
