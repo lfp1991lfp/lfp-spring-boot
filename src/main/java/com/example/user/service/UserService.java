@@ -17,9 +17,16 @@ public interface UserService {
 	 *
 	 * @param pageNo   页号
 	 * @param pageSize 每页显示记录数
-	 * @return
+	 * @return 查询的用户信息
 	 */
 	Page<UserInfo> findByPage(int pageNo, int pageSize);
 	
+	/**
+	 * 根据用户ID查询指定用户
+	 *
+	 * @param userId 用户ID
+	 * @return 用户信息
+	 */
+	UserInfo findUserById(int userId);
 	void insert(UserInfo person);
 }

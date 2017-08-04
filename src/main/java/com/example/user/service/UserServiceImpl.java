@@ -38,7 +38,11 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public void insert(UserInfo person) {
+	public UserInfo findUserById(int userId) {
+		return userInfoMapper.selectByPrimaryKey(userId);
+	}
 	
+	@Override
+	public void insert(UserInfo person) {
 	}
 }

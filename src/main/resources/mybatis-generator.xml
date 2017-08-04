@@ -2,7 +2,7 @@
 <!DOCTYPE generatorConfiguration
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
-
+<!-- http://git.oschina.net/free/Mybatis_Utils/blob/master/MybatisGeneator/MybatisGeneator.md -->
 <generatorConfiguration>
     <properties resource="config.properties"/>
 
@@ -46,8 +46,10 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="user_info">
-            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        <table tableName="%"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false">
+            <generatedKey column="ID" sqlStatement="Mysql" identity="true"/>
         </table>
     </context>
 </generatorConfiguration>

@@ -12,7 +12,7 @@ spring:
     url: jdbc:mysql://localhost:3306/caoyi?serverTimezone=UTC
     username: root
     password: lfp1991lfp
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       max-active: 20
@@ -45,6 +45,7 @@ pagehelper:
   params: count=countSql
   pageSizeZero: true
 mapper:
+  mappers:
+     - com.example.config.MyMapper
   not-empty: false
   identity: MYSQL
-  mappers: com.example.config.MyMapper
