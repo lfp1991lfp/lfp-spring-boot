@@ -16,7 +16,7 @@
 
         <commentGenerator>
             <!-- 忽略注释 -->
-            <property name="suppressAllComments" value="true"/>
+            <property name="suppressAllComments" value="false"/>
             <property name="suppressDate" value="true"/>
         </commentGenerator>
 
@@ -30,9 +30,12 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.example.user.model" targetProject="${entity.target.dir}">
+        <javaModelGenerator targetPackage="com.example.user.model"
+                            targetProject="${entity.target.dir}">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
+            <!-- 设置继承的基础类 -->
+            <property name="rootClass" value="com.example.base.BaseModel"/>
         </javaModelGenerator>
 
         <sqlMapGenerator targetPackage="xml"
@@ -46,9 +49,13 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="%"
-               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
-               enableSelectByExample="false">
+        <!-- enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" -->
+        <table tableName="user_info" schema="caoyi"
+               domainObjectName="UserInfo" alias="u_i"
+        >
             <generatedKey column="ID" sqlStatement="Mysql" identity="true"/>
         </table>
     </context>

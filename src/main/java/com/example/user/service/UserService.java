@@ -9,24 +9,33 @@ import java.util.List;
  * 服务层
  */
 public interface UserService {
-	
+
 	List<UserInfo> findAll();
-	
+
 	/**
-	 * 分页查询
+	 * 分页查询.
 	 *
 	 * @param pageNo   页号
 	 * @param pageSize 每页显示记录数
 	 * @return 查询的用户信息
 	 */
 	Page<UserInfo> findByPage(int pageNo, int pageSize);
-	
+
 	/**
-	 * 根据用户ID查询指定用户
+	 * 根据用户ID查询指定用户.
 	 *
 	 * @param userId 用户ID
 	 * @return 用户信息
 	 */
 	UserInfo findUserById(int userId);
+
+	/**
+	 * 通过model属性查找对应信息.
+	 *
+	 * @param userInfo model
+	 * @return model的分页信息
+	 */
+	Page<UserInfo> finByModel(UserInfo userInfo);
+
 	void insert(UserInfo person);
 }
