@@ -6,7 +6,6 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,7 +13,6 @@ import java.util.List;
  * 服务实现层
  */
 @Service
-@Transactional(readOnly = true, rollbackFor = Exception.class)
 public class UserServiceImpl implements UserService {
 
 	private final UserInfoMapper userInfoMapper;
@@ -45,7 +43,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Page<UserInfo> finByModel(UserInfo userInfo) {
 		Page<UserInfo> page = PageHelper.startPage(userInfo.getIndex(), userInfo.getRow());
-		userInfoMapper.selectAll();
+		userInfoMapper.select(userInfo);
 		return page;
 	}
 

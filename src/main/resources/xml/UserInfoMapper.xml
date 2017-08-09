@@ -5,15 +5,23 @@
         <!--
           WARNING - @mbg.generated
         -->
-        <id column="u_i_id" jdbcType="INTEGER" property="id"/>
-        <result column="u_i_userName" jdbcType="VARCHAR" property="username"/>
-        <result column="u_i_nickName" jdbcType="VARCHAR" property="nickname"/>
-        <result column="u_i_passWrd" jdbcType="VARCHAR" property="passwrd"/>
-        <result column="u_i_tag" jdbcType="CHAR" property="tag"/>
-        <result column="u_i_createDate" jdbcType="TIMESTAMP" property="createdate"/>
-        <result column="u_i_updateDate" jdbcType="TIMESTAMP" property="updatedate"/>
-        <result column="u_i_groupCode" jdbcType="VARCHAR" property="groupcode"/>
-        <result column="u_i_remark" jdbcType="VARCHAR" property="remark"/>
-        <result column="u_i_salt" jdbcType="VARCHAR" property="salt"/>
+        <id column="u_i_ID" jdbcType="INTEGER" property="id"/>
+        <result column="u_i_LOGIN_NAME" jdbcType="VARCHAR" property="loginName"/>
+        <result column="u_i_NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="u_i_PASSWORD" jdbcType="VARCHAR" property="password"/>
+        <result column="u_i_SALT" jdbcType="VARCHAR" property="salt"/>
+        <result column="u_i_BIRTHDAY" jdbcType="TIMESTAMP" property="birthday"/>
+        <result column="u_i_GENDER" jdbcType="SMALLINT" property="gender"/>
+        <result column="u_i_EMAIL" jdbcType="VARCHAR" property="email"/>
+        <result column="u_i_PHONE" jdbcType="VARCHAR" property="phone"/>
+        <result column="u_i_ICON" jdbcType="VARCHAR" property="icon"/>
+        <result column="u_i_CREATE_DATE" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="u_i_STATE" jdbcType="CHAR" property="state"/>
+        <result column="u_i_LOGIN_COUNT" jdbcType="SMALLINT" property="loginCount"/>
+        <result column="u_i_PREVIOUS_VISIT" jdbcType="TIMESTAMP" property="previousVisit"/>
+        <result column="u_i_LAST_VISIT" jdbcType="TIMESTAMP" property="lastVisit"/>
+        <result column="u_i_DEL_FLAG" jdbcType="VARCHAR" property="delFlag"/>
+        <result column="u_i_UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="u_i_DESCRIPTION" jdbcType="LONGVARCHAR" property="description"/>
     </resultMap>
 </mapper>

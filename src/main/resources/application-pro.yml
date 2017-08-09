@@ -1,10 +1,10 @@
-#用户名 密码配置
+#锟矫伙拷锟斤拷 锟斤拷锟斤拷锟斤拷锟斤拷
 security:
   user:
     name: admin
     password: test
-##端口号
-#配置访问路径，比如访问时为http://localhost:8081/demo/..
+##锟剿口猴拷
+#锟斤拷锟矫凤拷锟斤拷路锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟绞蔽猦ttp://localhost:8081/demo/..
 server:
    context-path: /demo
    port: 8082
