@@ -1,16 +1,11 @@
 package com.example.demo;
 
-import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.aop.Advisor;
-import org.springframework.aop.support.DefaultPointcutAdvisor;
-import org.springframework.aop.support.JdkRegexpMethodPointcut;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
@@ -22,24 +17,5 @@ public class DemoApplication {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-	}
-	
-	@Bean
-	public DruidStatInterceptor druidStatInterceptor() {
-		return new DruidStatInterceptor();
-	}
-	
-	@Bean
-	public JdkRegexpMethodPointcut druidStatPointcut() {
-		JdkRegexpMethodPointcut druidStatPointcut = new JdkRegexpMethodPointcut();
-		String patterns = "com.example.*.*.service.*";
-		druidStatPointcut.setPatterns(patterns);
-		return druidStatPointcut;
-	}
-	
-	//需要设置proxy-target-class: true
-	@Bean
-	public Advisor druidStatAdvisor() {
-		return new DefaultPointcutAdvisor(druidStatPointcut(), druidStatInterceptor());
 	}
 }

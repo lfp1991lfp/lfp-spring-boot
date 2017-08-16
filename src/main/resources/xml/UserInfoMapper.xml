@@ -22,6 +22,7 @@
         <result column="u_i_LAST_VISIT" jdbcType="TIMESTAMP" property="lastVisit"/>
         <result column="u_i_DEL_FLAG" jdbcType="VARCHAR" property="delFlag"/>
         <result column="u_i_UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="u_i_VERSION" jdbcType="INTEGER" property="version"/>
         <result column="u_i_DESCRIPTION" jdbcType="LONGVARCHAR" property="description"/>
     </resultMap>
 </mapper>

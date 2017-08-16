@@ -60,6 +60,9 @@ public class UserInfo extends BaseModel {
 	@Column(name = "UPDATE_TIME")
 	private Date updateTime;
 	
+	@Column(name = "VERSION")
+	private Integer version;
+	
 	@Column(name = "DESCRIPTION")
 	private String description;
 	
@@ -299,6 +302,20 @@ public class UserInfo extends BaseModel {
 	 */
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+	
+	/**
+	 * @return VERSION
+	 */
+	public Integer getVersion() {
+		return version;
+	}
+	
+	/**
+	 * @param version
+	 */
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 	
 	/**

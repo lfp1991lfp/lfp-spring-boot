@@ -32,31 +32,39 @@ spring:
       web-stat-filter:
         url-pattern: /*
         exclusions: \*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*
-      url: jdbc:mysql://localhost:3306/caoyi?serverTimezone=UTC
+      url: jdbc:mysql://localhost:3306/caoyi?serverTimezone=UTC&characterEncoding=UTF-8
       username: root
 #    lfp1991lfp
       password: e59duRga+h9Dt19TL6TlLhrkG/P3f2CHjDIioqkMPk59G8JebRWRta0BS7iJtNMKR0Y0PYS/sqcPlEIqJ3XDlw==
       driver-class-name: com.mysql.jdbc.Driver
-  jackson:
-      serialization:
-         write-dates-as-timestamps: false
   mvc:
     static-path-pattern: /**
+#    自定义异常的内容
+    throw-exception-if-no-handler-found: true
   resources:
     static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+#    不映射资源文件
+    add-mappings: false
   aop:
+    auto: true
     proxy-target-class: true
+  jackson:
+    serialization:
+       write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+    joda-date-time-format: yyyy-MM-dd'T'HH:mm:ss.SSSZ
 springfox:
    documentation:
       swagger:
          v2:
-           path: /api-docs
+           path: /api/v1
 management:
   security:
     enabled: false
 
 mybatis:
-  type-aliases-package: tk.mybatis.springboot.model
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:/xml/*Mapper.xml
 pagehelper:
   helper-dialect: mysql
   reasonable: true

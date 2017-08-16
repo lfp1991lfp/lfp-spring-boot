@@ -1,13 +1,16 @@
 package com.example.config.mvc;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * 配置mvc配置
+ * EnableWebMvc加上这个会影响jackson的格式化输出,json数据会格式化不了
  */
 @Configuration
-@EnableWebMvc
 public class ApplicationConfigMVC extends WebMvcConfigurerAdapter {
 	
 	/**
@@ -40,4 +43,5 @@ public class ApplicationConfigMVC extends WebMvcConfigurerAdapter {
 				.setUseSuffixPatternMatch(false)    //禁止使用带后缀的地址
 				.setUseTrailingSlashMatch(true);    //不区分末尾是否带斜杠的链接，比如http://host:port/a和http://host:port/a/一致
 	}
+	
 }

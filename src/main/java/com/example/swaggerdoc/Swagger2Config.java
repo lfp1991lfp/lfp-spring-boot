@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.async.DeferredResult;
 import springfox.documentation.annotations.ApiIgnore;
 import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseMessageBuilder;
 import springfox.documentation.schema.ModelRef;
@@ -24,6 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.time.LocalDate;
 import java.util.List;
 
+import static com.google.common.base.Predicates.or;
 import static com.google.common.collect.Lists.newArrayList;
 import static springfox.documentation.builders.PathSelectors.regex;
 import static springfox.documentation.schema.AlternateTypeRules.newRule;
@@ -95,7 +95,7 @@ public class Swagger2Config {
 				.groupName("demo")
 				.select()
 				.apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.any())
+				.paths(or(regex("/api/.*")))
 				.build()
 				.apiInfo(apiInfo())
 				.pathMapping("/")
@@ -150,16 +150,16 @@ public class Swagger2Config {
 //		return new UiConfiguration(
 //				"validator");      // requestTimeout => in milliseconds, defaults to null (uses jquery xh timeout)
 //	}
-//	//Here is an example where we select any api that matches one of these paths
-////	protected Predicate<String> paths() {
-////		return or(
-////				regex("/business.*"),
-////				regex("/some.*"),
-////				regex("/contacts.*"),
-////				regex("/demo/*.*"),
-////				regex("/springsRestController.*"),
-////				regex("/test.*"));
-////	}
+	//Here is an example where we select any api that matches one of these paths
+//	protected Predicate<String> paths() {
+//		return or(
+//				regex("/business.*"),
+//				regex("/some.*"),
+//				regex("/contacts.*"),
+//				regex("/demo/*.*"),
+//				regex("/springsRestController.*"),
+//				regex("/test.*"));
+//	}
 //
 	private List<SecurityReference> defaultAuth() {
 		AuthorizationScope authorizationScope

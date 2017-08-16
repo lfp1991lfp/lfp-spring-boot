@@ -18,11 +18,11 @@ import javax.sql.DataSource;
 @Configuration
 public class TransactionManagementConfig implements TransactionManagementConfigurer {
 	
-	@Resource(name = "transactionManagerPrimary")
+	@Resource(name = "txPrimaryManager")
 	private PlatformTransactionManager transactionManagerPrimary;
 	
-	@Bean(name = "transactionManagerPrimary")
-	public PlatformTransactionManager txManager(DataSource dataSource) {
+	@Bean(name = "txPrimaryManager")
+	public PlatformTransactionManager txPrimaryManager(DataSource dataSource) {
 		return new DataSourceTransactionManager(dataSource);
 	}
 	
