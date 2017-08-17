@@ -3,8 +3,9 @@ package com.example.base;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Transient;
+import java.io.Serializable;
 
-public class BaseModel {
+public class BaseModel implements Serializable {
 	
 	@Transient
 	@JsonIgnore

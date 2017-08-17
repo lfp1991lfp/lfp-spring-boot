@@ -40,17 +40,25 @@ public interface UserService {
 	/**
 	 * 数据插入
 	 *
-	 * @param userInfo 保存的用户信息
+	 * @param userInfo 保存的用户信息.
 	 * @return 新生成的用户信息
 	 */
 	UserInfo insert(UserInfo userInfo);
 	
 	/**
-	 * 数据更新，若找不到数据，则插入数据
+	 * 数据更新，若找不到数据，则插入数据.
 	 *
 	 * @param id       用户id
 	 * @param userInfo 需要插座的数据
 	 * @return 操作后的数据
 	 */
 	UserInfo update(int id, UserInfo userInfo);
+	
+	/**
+	 * 通过用户id删除该用户.
+	 *
+	 * @param id 用户id
+	 * @return 返回删除用户的信息
+	 */
+	int deleteById(int id);
 }

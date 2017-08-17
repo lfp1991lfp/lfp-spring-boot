@@ -5,28 +5,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.async.DeferredResult;
 import springfox.documentation.annotations.ApiIgnore;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.builders.ResponseMessageBuilder;
-import springfox.documentation.schema.ModelRef;
-import springfox.documentation.schema.WildcardType;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static com.google.common.base.Predicates.or;
 import static com.google.common.collect.Lists.newArrayList;
 import static springfox.documentation.builders.PathSelectors.regex;
-import static springfox.documentation.schema.AlternateTypeRules.newRule;
 
 @Configuration
 @EnableSwagger2
@@ -50,12 +42,12 @@ public class Swagger2Config {
 	//	@Bean
 //	public Docket petApi() {
 //		return new Docket(DocumentationType.SWAGGER_2)
-//				.groupName("full-petstore-api")
+//				.groupName("api-v2")
 //				.apiInfo(apiInfo())
 //				.select()
-//				.paths(PathSelectors.any())    //petstorePaths()
+//				.paths(or(regex("/api/{version2}/.*")))  //匹配路径为/api/.*的api显示到doc文档上
 //				.build()
-//				.securitySchemes(newArrayList(oauth()))
+////				.securitySchemes(newArrayList(oauth()))
 //				.securityContexts(newArrayList(securityContext()));
 //	}
 //
@@ -92,29 +84,30 @@ public class Swagger2Config {
 	@Bean
 	public Docket createRestApi() {
 		return new Docket(DocumentationType.SWAGGER_2)
-				.groupName("demo")
+				.groupName("api-v1")
 				.select()
-				.apis(RequestHandlerSelectors.any())
-				.paths(or(regex("/api/.*")))
+				.apis(RequestHandlerSelectors.any())   //把所有扫描到的api都显示出来
+				.paths(or(regex("/api/.*")))  //匹配路径为/api/.*的api显示到doc文档上
 				.build()
-				.apiInfo(apiInfo())
-				.pathMapping("/")
-				.directModelSubstitute(LocalDate.class, String.class)
-				.genericModelSubstitutes(ResponseEntity.class)
-				.alternateTypeRules(
-						newRule(typeResolver.resolve(DeferredResult.class,
-								typeResolver.resolve(ResponseEntity.class, WildcardType.class)),
-								typeResolver.resolve(WildcardType.class)))
-				.useDefaultResponseMessages(false)
-				.globalResponseMessage(RequestMethod.GET,
-						newArrayList(new ResponseMessageBuilder()
-								.code(500)
-								.message("500 message")
-								.responseModel(new ModelRef("Error"))
-								.build()))
-				.securitySchemes(newArrayList(apiKey()))
-				.securityContexts(newArrayList(securityContext()))
-				.enableUrlTemplating(true)
+//				.pathProvider()     //这个主要是修改项目的访问地址
+				.apiInfo(apiInfo());
+//				.pathMapping("/")
+//				.directModelSubstitute(LocalDate.class, String.class)
+//				.genericModelSubstitutes(ResponseEntity.class)
+//				.alternateTypeRules(
+//						newRule(typeResolver.resolve(DeferredResult.class,
+//								typeResolver.resolve(ResponseEntity.class, WildcardType.class)),
+//								typeResolver.resolve(WildcardType.class)))
+//				.useDefaultResponseMessages(false)
+//				.globalResponseMessage(RequestMethod.GET,
+//						newArrayList(new ResponseMessageBuilder()
+//								.code(500)
+//								.message("500 message")
+//								.responseModel(new ModelRef("Error"))
+//								.build()))
+////				.securitySchemes(newArrayList(apiKey()))
+////				.securityContexts(newArrayList(securityContext()))
+//				.enableUrlTemplating(true);
 //				.globalOperationParameters(
 //						newArrayList(new ParameterBuilder()
 //								.name("token")
@@ -123,7 +116,6 @@ public class Swagger2Config {
 //								.parameterType("query")
 //								.required(true)
 //								.build()))
-				.tags(new Tag("Pet Service", "All apis relating to pets"));
 	}
 
 	private ApiKey apiKey() {
@@ -143,12 +135,6 @@ public class Swagger2Config {
 //		return new SecurityConfiguration("abc", "123", "pets",
 //				"petstore", "123",
 //				ApiKeyVehicle.HEADER, "", ",");
-//	}
-//
-//	@Bean
-//	UiConfiguration uiConfig() {
-//		return new UiConfiguration(
-//				"validator");      // requestTimeout => in milliseconds, defaults to null (uses jquery xh timeout)
 //	}
 	//Here is an example where we select any api that matches one of these paths
 //	protected Predicate<String> paths() {
@@ -178,4 +164,17 @@ public class Swagger2Config {
 				.version("2.0")
 				.build();
 	}
+
+//	@Bean
+//	UiConfiguration uiConfig() {
+//		return new UiConfiguration(
+//				null,// url
+//				"none",       // docExpansion          => none | list（是否展开）
+//				"alpha",      // apiSorter             => alpha
+//				"schema",     // defaultModelRendering => schema
+//				UiConfiguration.Constants.DEFAULT_SUBMIT_METHODS,
+//				false,        // enableJsonEditor      => true | false
+//				true,         // showRequestHeaders    => true | false
+//				60000L);      // requestTimeout => in milliseconds, defaults to null (uses jquery xh timeout)
+//	}
 }

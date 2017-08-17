@@ -27,7 +27,7 @@ public class ApiRequestMappingHandlerMapping extends RequestMappingHandlerMappin
 			mappingUrlBuilder.append(classRequestMapping.value()[0]);
 		}
 		String mappingUrl = mappingUrlBuilder.toString();
-		if (!mappingUrl.contains("{version}")) {
+		if (!mappingUrl.contains("{version")) {
 			return null;
 		}
 		ApiVersion apiVersion = AnnotationUtils.findAnnotation(handlerType, ApiVersion.class);

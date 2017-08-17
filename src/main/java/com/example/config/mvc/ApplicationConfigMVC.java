@@ -1,10 +1,7 @@
 package com.example.config.mvc;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 
 /**
  * 配置mvc配置
@@ -44,4 +41,8 @@ public class ApplicationConfigMVC extends WebMvcConfigurerAdapter {
 				.setUseTrailingSlashMatch(true);    //不区分末尾是否带斜杠的链接，比如http://host:port/a和http://host:port/a/一致
 	}
 	
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/api-docs/").setViewName("redirect:swagger-ui.html");
+	}
 }

@@ -6,14 +6,13 @@ import com.example.user.service.UserService;
 import com.example.user.service.UserServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +22,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/{version}/user/")
 @Slf4j
-@Api(value = "用户管理", tags = {"user"},
-		description = "用户管理", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(value = "用户管理", tags = "user",
+		description = "用户管理")
 public class UserController {
 	
 	private final Environment env;
@@ -35,35 +34,36 @@ public class UserController {
 		this.env = env;
 		this.userService = userService;
 	}
-
-//	@ApiOperation(value = "查询用户", notes = "查询用户notes", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//	@GetMapping(value = "{id}")
-//	@ApiVersion(1)
-//	public UserInfo view(@ApiParam(value = "用户参数") @PathVariable("id") int id) {
-//		log.info("启动spring-boot，当前环境为" + env.getActiveProfiles()[0]);
-//		log.debug("success");
-//
-//		return userService.findUserById(id);
-//	}
 	
-	@ApiOperation(value = "获取所有用户的信息", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@GetMapping(value = "list")
+	@ApiOperation(value = "查询用户", notes = "查询用户notes")
+	@GetMapping(value = "{id}")
 	@ApiVersion(1)
-	public List<UserInfo> userList(@ApiVersion(1) @PathVariable("version") String version) {
+	public UserInfo view(@ApiVersion(1) String version,
+	                     @ApiParam(value = "用户id") @PathVariable("id") int id) {
+		return userService.findUserById(id);
+	}
+	
+	@ApiOperation(value = "获取所有用户的信息", tags = "user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value = "v1/list")
+	@ApiVersion(1)
+	//@ApiVersion(1)@ApiParam(value = "用户参数")@PathVariable("version") String version
+	public List<UserInfo> userList(@ApiVersion(1) String version) {
 		return userService.findAll();
 	}
-
-//	@ApiOperation(value = "分页查询用户信息", response = UserInfo.class,
-//			notes = "index小标从1开始,为0表示查询所有用户", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//	@GetMapping(value = "page")
-//	@ApiVersion(1)
-//	public List<UserInfo> page(@ApiParam(name = "page", value = "页数索引")
-//	                           @RequestParam(defaultValue = "1") int page,
-//	                           @ApiParam(name = "size", value = "页码")
-//	                           @RequestParam(defaultValue = "1") int size) {
-//		return userService.findByPage(page, size);
-//	}
-//
+	
+	@ApiOperation(value = "分页查询用户信息", response = UserInfo.class,
+			notes = "index小标从1开始,为0表示查询所有用户", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@GetMapping(value = "page")
+	@ApiVersion(1)
+	public List<UserInfo> page(@ApiVersion(1) String version,
+	                           @ApiParam(name = "page", value = "页数索引")
+	                           @RequestParam(defaultValue = "1") int page,
+	                           @ApiParam(name = "size", value = "页码")
+	                           @RequestParam(defaultValue = "1") int size) {
+		return userService.findByPage(page, size);
+	}
+	
+	//
 //	@ApiOperation(value = "获取用户的信息", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 //	@GetMapping(value = "findModel")
 //	@ApiVersion(1)
@@ -71,19 +71,30 @@ public class UserController {
 //		return userService.finByModel(userInfo);
 //	}
 //
-//	@ApiOperation(value = "创建用户的信息", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//	@PostMapping(value = "create")    //post属于新建资源，属于创建
-//	@ResponseStatus(code = HttpStatus.CREATED)
-//	@ApiVersion(1)
-//	public UserInfo create(@RequestBody UserInfo userInfo) {
-//		return userService.insert(userInfo);
-//	}
-//
-//	@ApiOperation(value = "更新用户的信息", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//	@PutMapping(value = "update/{id}")
-//	@ResponseStatus(code = HttpStatus.OK)
-//	@ApiVersion(1)
-//	public UserInfo update(@PathVariable("id") int id, @RequestBody UserInfo userInfo) {
-//		return userService.update(id, userInfo);
-//	}
+	@ApiOperation(value = "创建用户的信息", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, notes = "开发完成")
+	@PostMapping(value = "create")    //post属于新建资源，属于创建
+	@ResponseStatus(code = HttpStatus.CREATED)
+	@ApiVersion(1)
+	public UserInfo create(@ApiVersion(1) String version, @RequestBody UserInfo userInfo) {
+		return userService.insert(userInfo);
+	}
+	
+	@ApiOperation(value = "更新用户的信息", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@PutMapping(value = "update/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	@ApiVersion(1)
+	public UserInfo update(@ApiVersion(1) String version,
+	                       @PathVariable("id") int id, @RequestBody UserInfo userInfo) {
+		return userService.update(id, userInfo);
+	}
+	
+	@ApiOperation(value = "删除用户信息", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@DeleteMapping(value = "delete/{id}")
+	@ResponseStatus(code = HttpStatus.OK)
+	@ApiVersion(1)
+	public int delete(@ApiVersion(1) String version,
+	                  @PathVariable("id") int id) {
+		return userService.deleteById(id);
+	}
+	
 }

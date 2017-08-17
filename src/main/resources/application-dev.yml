@@ -53,6 +53,20 @@ spring:
        write-dates-as-timestamps: false
     default-property-inclusion: non_null
     joda-date-time-format: yyyy-MM-dd'T'HH:mm:ss.SSSZ
+#  redis数据库配置
+  redis:
+#  数据库索引
+    database: 0
+#  数据库服务器地址
+    host: localhost
+    port: 6379
+    password: lfp
+    pool:
+      max-active: 8
+      max-idle: 8
+      max-wait: -1
+      min-idle: 0
+    timeout: 6000
 springfox:
    documentation:
       swagger:
