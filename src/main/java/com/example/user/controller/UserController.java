@@ -1,7 +1,7 @@
 package com.example.user.controller;
 
 import com.example.config.mvc.ApiVersion;
-import com.example.user.model.UserInfo;
+import com.example.model.UserInfo;
 import com.example.user.service.UserService;
 import com.example.user.service.UserServiceImpl;
 import io.swagger.annotations.Api;
@@ -20,7 +20,7 @@ import java.util.List;
  * 用户控制器.
  */
 @RestController
-@RequestMapping("/api/{version}/user/")
+@RequestMapping("/user/")
 @Slf4j
 @Api(value = "用户管理", tags = "user",
 		description = "用户管理")
@@ -37,9 +37,7 @@ public class UserController {
 	
 	@ApiOperation(value = "查询用户", notes = "查询用户notes")
 	@GetMapping(value = "{id}")
-	@ApiVersion(1)
-	public UserInfo view(@ApiVersion(1) String version,
-	                     @ApiParam(value = "用户id") @PathVariable("id") int id) {
+	public UserInfo view(@ApiParam(value = "用户id") @PathVariable("id") int id) {
 		return userService.findUserById(id);
 	}
 	
@@ -47,7 +45,7 @@ public class UserController {
 	@GetMapping(value = "v1/list")
 	@ApiVersion(1)
 	//@ApiVersion(1)@ApiParam(value = "用户参数")@PathVariable("version") String version
-	public List<UserInfo> userList(@ApiVersion(1) String version) {
+	public List<UserInfo> userList() {
 		return userService.findAll();
 	}
 	
@@ -55,8 +53,7 @@ public class UserController {
 			notes = "index小标从1开始,为0表示查询所有用户", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@GetMapping(value = "page")
 	@ApiVersion(1)
-	public List<UserInfo> page(@ApiVersion(1) String version,
-	                           @ApiParam(name = "page", value = "页数索引")
+	public List<UserInfo> page(@ApiParam(name = "page", value = "页数索引")
 	                           @RequestParam(defaultValue = "1") int page,
 	                           @ApiParam(name = "size", value = "页码")
 	                           @RequestParam(defaultValue = "1") int size) {
@@ -75,7 +72,7 @@ public class UserController {
 	@PostMapping(value = "create")    //post属于新建资源，属于创建
 	@ResponseStatus(code = HttpStatus.CREATED)
 	@ApiVersion(1)
-	public UserInfo create(@ApiVersion(1) String version, @RequestBody UserInfo userInfo) {
+	public UserInfo create(@RequestBody UserInfo userInfo) {
 		return userService.insert(userInfo);
 	}
 	
@@ -83,8 +80,7 @@ public class UserController {
 	@PutMapping(value = "update/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
 	@ApiVersion(1)
-	public UserInfo update(@ApiVersion(1) String version,
-	                       @PathVariable("id") int id, @RequestBody UserInfo userInfo) {
+	public UserInfo update(@PathVariable("id") int id, @RequestBody UserInfo userInfo) {
 		return userService.update(id, userInfo);
 	}
 	
@@ -92,8 +88,7 @@ public class UserController {
 	@DeleteMapping(value = "delete/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
 	@ApiVersion(1)
-	public int delete(@ApiVersion(1) String version,
-	                  @PathVariable("id") int id) {
+	public int delete(@PathVariable("id") int id) {
 		return userService.deleteById(id);
 	}
 	

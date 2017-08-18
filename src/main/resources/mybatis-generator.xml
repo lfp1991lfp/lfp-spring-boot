@@ -30,7 +30,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.example.user.model"
+        <javaModelGenerator targetPackage="com.example.model"
                             targetProject="${entity.target.dir}">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
@@ -43,7 +43,7 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="com.example.user.model.mapper"
+        <javaClientGenerator targetPackage="com.example.model.mapper"
                              targetProject="${entity.target.dir}"
                              type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
@@ -54,8 +54,11 @@
                enableDeleteByExample="false"
                enableSelectByExample="false" -->
         <table tableName="user_info" schema="caoyi"
-               domainObjectName="UserInfo" alias="u_i"
-        >
+               domainObjectName="UserInfo" mapperName="UserDao" alias="u_i">
+            <generatedKey column="ID" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="client_user" schema="caoyi"
+               domainObjectName="ClientUser" mapperName="ClientUserDao" alias="c_u">
             <generatedKey column="ID" sqlStatement="Mysql" identity="true"/>
         </table>
     </context>

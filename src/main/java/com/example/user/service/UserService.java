@@ -1,6 +1,6 @@
 package com.example.user.service;
 
-import com.example.user.model.UserInfo;
+import com.example.model.UserInfo;
 import com.github.pagehelper.Page;
 
 import java.util.List;
